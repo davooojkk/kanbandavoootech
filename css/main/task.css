@@ -1,0 +1,254 @@
+.tarea {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+  padding: 16px 14px 14px 40px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--white-0035),
+      rgba(255, 255, 255, 0.012)
+    ),
+    var(--bg-task);
+
+  border: 1px solid var(--border-task);
+  border-radius: 13px;
+
+  box-shadow:
+    0 10px 25px var(--shadow-dark-soft),
+    inset 0 1px 0 var(--white-002);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tarea:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--border-task-hover);
+
+  box-shadow:
+    0 16px 34px var(--shadow-dark-strong),
+    inset 0 1px 0 var(--white-003);
+}
+
+
+/* =========================
+   INDICADOR
+========================= */
+
+.tarea::before {
+  content: "";
+
+  position: absolute;
+
+  top: 21px;
+  left: 17px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+#pendientes .tarea::before {
+  background: var(--pending);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-pending-dot),
+    0 0 16px var(--shadow-pending-glow);
+}
+
+#en-progreso .tarea::before {
+  background: var(--progress);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-progress-dot),
+    0 0 16px var(--shadow-progress-glow);
+}
+
+#finalizados .tarea::before {
+  background: var(--done-dot);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-done-dot),
+    0 0 16px var(--shadow-done-glow);
+}
+
+
+/* =========================
+   TITULO
+========================= */
+
+.tarea h1 {
+  grid-column: 1 / -1;
+
+  color: var(--text-task);
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+
+  letter-spacing: -0.015em;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.tarea button {
+  min-height: 34px;
+
+  padding: 7px 11px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* AVANZAR */
+
+.tarea button:first-of-type {
+  color: var(--text-white);
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  box-shadow:
+    0 6px 18px var(--shadow-primary-button);
+}
+
+.tarea button:first-of-type:hover {
+  transform: translateX(2px);
+
+  box-shadow:
+    0 8px 24px var(--shadow-primary-button-hover);
+}
+
+
+/* ELIMINAR */
+
+.tarea button:last-of-type {
+  color: var(--text-secondary);
+
+  background: var(--white-0015);
+
+  border: 1px solid var(--border-delete);
+}
+
+.tarea button:last-of-type:hover {
+  color: var(--text-primary);
+
+  background: var(--delete-hover-bg);
+
+  border-color: var(--border-delete-hover);
+}
+
+
+/* =========================
+   EN PROGRESO
+========================= */
+
+#en-progreso .tarea {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(102, 217, 157, 0.035),
+      rgba(102, 217, 157, 0.015)
+    ),
+    var(--bg-task-progress);
+
+  border-color: var(--border-progress);
+}
+
+#en-progreso .tarea:hover {
+  border-color: var(--border-progress-hover);
+
+  box-shadow:
+    0 16px 34px var(--shadow-dark-strong),
+    0 0 28px var(--shadow-progress-card);
+}
+
+#en-progreso .tarea h1 {
+  color: var(--text-progress);
+}
+
+#en-progreso .tarea button:first-of-type {
+  background: linear-gradient(
+    135deg,
+    var(--progress-button),
+    var(--progress-button-dark)
+  );
+
+  box-shadow:
+    0 6px 18px var(--shadow-progress-button);
+}
+
+#en-progreso .tarea button:first-of-type:hover {
+  box-shadow:
+    0 8px 24px var(--shadow-progress-button-hover);
+}
+
+
+/* =========================
+   FINALIZADAS
+========================= */
+
+#finalizados .tarea {
+  opacity: 0.62;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(223, 115, 115, 0.025),
+      rgba(223, 115, 115, 0.01)
+    ),
+    var(--bg-task-done);
+
+  border-color: var(--border-done);
+}
+
+#finalizados .tarea:hover {
+  opacity: 0.78;
+}
+
+#finalizados .tarea h1 {
+  color: var(--text-done);
+
+  font-weight: 400;
+
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+#finalizados .tarea button:first-of-type {
+  display: none;
+}

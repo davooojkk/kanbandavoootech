@@ -1,0 +1,86 @@
+#pendientes,
+#en-progreso,
+#finalizados {
+  position: relative;
+
+  min-height: 520px;
+
+  padding: 70px 14px 16px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--white-0025),
+      rgba(255, 255, 255, 0.008)
+    ),
+    var(--bg-column);
+
+  border: 1px solid var(--border-column);
+  border-radius: 18px;
+
+  box-shadow:
+    0 22px 50px var(--shadow-dark-medium),
+    inset 0 1px 0 var(--white-0025);
+}
+
+
+/* TITULOS */
+
+#pendientes::before,
+#en-progreso::before,
+#finalizados::before {
+  position: absolute;
+
+  top: 22px;
+  left: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#pendientes::before {
+  content: "Pendientes";
+
+  color: var(--pending-heading);
+}
+
+#en-progreso::before {
+  content: "En progreso";
+
+  color: var(--progress-heading);
+}
+
+#finalizados::before {
+  content: "Finalizadas";
+
+  color: var(--done-heading);
+}
+
+
+/* SEPARADOR */
+
+#pendientes::after,
+#en-progreso::after,
+#finalizados::after {
+  content: "";
+
+  position: absolute;
+
+  top: 51px;
+  right: 14px;
+  left: 14px;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--white-007),
+    transparent
+  );
+}

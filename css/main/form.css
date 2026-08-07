@@ -1,0 +1,57 @@
+#task-form {
+  grid-column: 1 / -1;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 7px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--white-0035),
+      var(--white-0015)
+    ),
+    var(--bg-form);
+
+  border: 1px solid var(--border-form);
+  border-radius: 16px;
+
+  box-shadow:
+    0 18px 45px var(--shadow-dark-form),
+    inset 0 1px 0 var(--white-0035);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+#task-form:focus-within {
+  border-color: rgba(232, 87, 165, 0.55);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-primary-focus),
+    0 20px 50px var(--shadow-dark-focus);
+
+  transform: translateY(-1px);
+}
+
+#task-input {
+  width: 100%;
+
+  padding: 15px 17px;
+
+  color: var(--text-white);
+  background: transparent;
+
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+#task-input::placeholder {
+  color: var(--text-muted);
+}

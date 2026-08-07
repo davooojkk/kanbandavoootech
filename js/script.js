@@ -101,6 +101,7 @@ function crearTarjeta(tarea) {
   tarjetaDiv.classList.add('tarea');
   const tarjetaTitulo = document.createElement('h1');
   tarjetaTitulo.innerText = tarea.nombre
+  activarEdicion(tarea, tarjetaTitulo)
   const botonAvanzar = document.createElement('button')
   botonAvanzar.innerText = "→";
   const botonEliminar = document.createElement('button');
@@ -126,6 +127,54 @@ function crearTarjeta(tarea) {
 return tarjetaDiv;
   
 }
+
+// ---- cambiar nombre de las tareas ---- //
+
+function editarNombre(id, nuevoNombre) {
+  const tareaEncontrada = tareas.find(
+    (tarea) => tarea.id === id
+  );
+
+  if (tareaEncontrada !== undefined) {
+    tareaEncontrada.nombre = nuevoNombre;
+
+      guardarTareas();
+      renderTareas();
+  }
+}
+
+// ---- abrir input de edicion de nombre ---- //
+
+function activarEdicion(tarea, tarjetaTitulo) {
+    tarjetaTitulo.addEventListener('click', () => {
+    const inputEditar = document.createElement('input');
+
+    inputEditar.classList.add("input-edit-nombres");
+    inputEditar.value = tarea.nombre;
+
+    tarjetaTitulo.replaceWith(inputEditar);
+    inputEditar.focus();
+
+    function guardarEdicion() {
+      const nuevoNombre = inputEditar.value.trim();
+
+      if(nuevoNombre !== "") {
+        editarNombre(tarea.id, nuevoNombre);
+      }
+    };
+
+    inputEditar.addEventListener('keydown', (event) => {
+      if(event.key === 'Enter') {
+        guardarEdicion();
+      }
+    });
+
+    inputEditar.addEventListener('blur', guardarEdicion);
+
+});
+};
+
+
 
 // ---- render tareas ---- //
 
