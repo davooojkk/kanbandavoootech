@@ -1,20 +1,24 @@
-// crear array, agregar input y convertirlo en tarea
+// ---- selectores DOM ---- //
 
-const formulario = document.querySelector("#task-form");
-const formularioInput = document.querySelector("#task-input");
+const formulario = document.querySelector('#task-form');
+const formularioInput = document.querySelector('#task-input');
+const sectionPendientes = document.querySelector('#pendientes');
+const sectionProgresos = document.querySelector('#en-progreso');
+const sectionFinalizados = document.querySelector('#finalizados');
+
+// ---- verificamos tareas guardadas ---- //
 
 const tareasGuardadas = window.localStorage.getItem('Mis Tareas');
 
-let tareas; 
+let tareas;
 
-if(tareasGuardadas !== null) {
+if (tareasGuardadas !== null) {
   tareas = JSON.parse(tareasGuardadas);
 } else {
   tareas = [];
 };
 
-// const tareas = [];
-
+// ---- evento del formulario ---- //
 
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -23,87 +27,133 @@ formulario.addEventListener('submit', (event) => {
 
   if (nombreTarea === "") {
     return;
-  };
+  }
 
+  crearTarea(nombreTarea);
+
+  formularioInput.value = "";
+
+});
+
+// ---- function crear tarea ---- //
+
+function crearTarea(nombre) {
   const nuevaTarea = {
     id: Date.now(),
-    nombre: nombreTarea,
-    estado: "pendiente"
+    nombre: nombre,
+    estado: "pendiente",
   };
 
   tareas.push(nuevaTarea);
 
   guardarTareas();
-  renderTareas()
+  renderTareas();
 
-  formularioInput.value = "";
+};
 
-  console.log(tareas);
-});
+// ---- function eliminar tareas ---- //
 
+function eliminarTarea(id) {
+  const tareaEncontrada = tareas.findIndex(
+    (tarea) => tarea.id === id 
+  );
 
-// renderizar tareas
+  if(tareaEncontrada !== -1) {
+    tareas.splice(tareaEncontrada, 1);
+
+    guardarTareas();
+    renderTareas();
+  }
+  };
+
+  
+
+// ---- cambiar estado ---- //
+
+function cambiarEstado(id, nuevoEstado) {
+  const tareaEncontrada = tareas.find(
+    (tarea) => tarea.id === id
+  );
+
+  if(tareaEncontrada !== undefined) {
+    tareaEncontrada.estado = nuevoEstado;
+
+    guardarTareas();
+    renderTareas();
+  }
+};
+
+// ---- obtener siguiente estado ---- //
+
+function pasarEstado(estadoActual) {
+  if(estadoActual === "pendiente") {
+    return "en progreso";
+  } else if (estadoActual === "en progreso") {
+    return "finalizado";
+  }
+};
+
+// ---- creación de tarjeta ---- //
+
+function crearTarjeta(tarea) {
+
+  const tarjetaDiv = document.createElement('div');
+  tarjetaDiv.classList.add('tarea');
+  const tarjetaTitulo = document.createElement('h1');
+  tarjetaTitulo.innerText = tarea.nombre
+  const botonAvanzar = document.createElement('button')
+  botonAvanzar.innerText = "→";
+  const botonEliminar = document.createElement('button');
+  botonEliminar.innerText = 'Eliminar';
+
+  botonEliminar.addEventListener('click', () => {
+    eliminarTarea(tarea.id);
+  });
+  botonAvanzar.addEventListener('click', () => {
+    const siguienteEstado = pasarEstado(tarea.estado);
+    
+    if (siguienteEstado !== undefined) {
+      cambiarEstado(tarea.id, siguienteEstado)
+    };
+  });
+
+  tarjetaDiv.append(
+  tarjetaTitulo,
+  botonAvanzar,
+  botonEliminar
+);
+
+return tarjetaDiv;
+  
+}
+
+// ---- render tareas ---- //
 
 function renderTareas() {
-  const sectionPendientes = document.querySelector('#pendientes');
-  const sectionProgresos = document.querySelector('#en-progreso');
-  const sectionFinalizados = document.querySelector('#finalizados');
-  
-  
-  sectionPendientes.innerHTML = '';
-  sectionProgresos.innerHTML = '';
-  sectionFinalizados.innerHTML = '';
-  
-  
-  tareas.forEach((tarea) => {
-    const tareaTarjeta = document.createElement('div');
-    tareaTarjeta.classList.add('tarea');
-    const tareaTitulo = document.createElement('h1');
-    tareaTitulo.innerText = tarea.nombre;
-    const tareaBoton = document.createElement('button');
-    tareaBoton.innerText = '→';
-    const eliminarBoton = document.createElement('button');
-    eliminarBoton.innerText = 'eliminar';
-    tareaTarjeta.appendChild(tareaTitulo);
-    tareaTarjeta.appendChild(tareaBoton);
-    tareaTarjeta.appendChild(eliminarBoton);
+  sectionPendientes.innerHTML = "";
+  sectionProgresos.innerHTML = "";
+  sectionFinalizados.innerHTML = "";
 
-    eliminarBoton.addEventListener('click', () => {
-      const tareaIndex = tareas.findIndex(
-        (tareaActual) => tareaActual.id === tarea.id
-      );
-      if (tareaIndex !== -1) {
-        tareas.splice(tareaIndex, 1);
-        guardarTareas();
-        renderTareas();
-      }
-    });
-  
-      if (tarea.estado === "pendiente") {
-        sectionPendientes.appendChild(tareaTarjeta);
-        tareaBoton.addEventListener('click', () => {
-          tarea.estado = "en progreso";
-          guardarTareas();
-          renderTareas();
-        });
-      } else if (tarea.estado === "en progreso") {
-        sectionProgresos.appendChild(tareaTarjeta);
-        tareaBoton.addEventListener('click', () => {
-          tarea.estado = "finalizado";
-          guardarTareas();
-          renderTareas();
-        });
-      } else if (tarea.estado === "finalizado") {
-        sectionFinalizados.appendChild(tareaTarjeta); 
-      };
+  tareas.forEach(tarea => {
+    const tarjeta = crearTarjeta(tarea);
+
+    if (tarea.estado === "pendiente") {
+      sectionPendientes.appendChild(tarjeta);
+    } else if (tarea.estado === "en progreso") {
+      sectionProgresos.appendChild(tarjeta);
+    } else if (tarea.estado === "finalizado") {
+      sectionFinalizados.appendChild(tarjeta)
+    }
+
   });
 };
 
-// guardar tareas
+// ---- guardar tareas ---- //
 
 function guardarTareas() {
-  localStorage.setItem("Mis Tareas", JSON.stringify(tareas));
-};
-
+   localStorage.setItem("Mis Tareas", JSON.stringify(tareas));
+ };
 
 renderTareas();
+
+
