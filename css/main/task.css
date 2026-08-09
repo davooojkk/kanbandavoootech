@@ -1,0 +1,221 @@
+.tarea {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+  padding: 16px 14px 14px 40px;
+
+  cursor: grab;
+
+  background:
+    linear-gradient(180deg, var(--white-0035), rgba(255, 255, 255, 0.012)),
+    var(--bg-task);
+
+  border: 1px solid var(--border-task);
+  border-radius: 13px;
+
+  box-shadow:
+    0 10px 25px var(--shadow-dark-soft),
+    inset 0 1px 0 var(--white-002);
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tarea:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--border-task-hover);
+
+  box-shadow:
+    0 16px 34px var(--shadow-dark-strong),
+    inset 0 1px 0 var(--white-003);
+}
+
+.tarea:active {
+  cursor: grabbing;
+}
+
+/* =========================
+   DRAG
+========================= */
+
+.tarea.dragging {
+  opacity: 0.35;
+
+  transform: scale(0.97) rotate(1deg);
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px var(--shadow-primary-soft),
+    0 18px 35px var(--shadow-dark-strong);
+}
+
+/* =========================
+   INDICADOR
+========================= */
+
+.tarea::before {
+  content: "";
+
+  position: absolute;
+
+  top: 21px;
+  left: 17px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+#pendientes .tarea::before {
+  background: var(--pending);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-pending-dot),
+    0 0 16px var(--shadow-pending-glow);
+}
+
+#en-progreso .tarea::before {
+  background: var(--progress);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-progress-dot),
+    0 0 16px var(--shadow-progress-glow);
+}
+
+#finalizados .tarea::before {
+  background: var(--done-dot);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-done-dot),
+    0 0 16px var(--shadow-done-glow);
+}
+
+/* =========================
+   TITULO
+========================= */
+
+.tarea h1 {
+  grid-column: 1 / -1;
+
+  color: var(--text-task);
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+
+  letter-spacing: -0.015em;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   BOTÓN ELIMINAR
+========================= */
+
+.tarea button {
+  justify-self: end;
+  width: fit-content;
+
+  min-height: auto;
+  padding: 0.5rem;
+
+  color: var(--text-secondary);
+  background: var(--white-0015);
+
+  border: 1px solid var(--border-delete);
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.01em;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.tarea button:hover {
+  color: var(--text-primary);
+  background: var(--delete-hover-bg);
+  border-color: var(--border-delete-hover);
+
+  transform: translateY(-1px);
+}
+
+.tarea button:hover {
+  color: var(--text-primary);
+
+  background: var(--delete-hover-bg);
+
+  border-color: var(--border-delete-hover);
+
+  transform: translateY(-1px);
+}
+
+/* =========================
+   EN PROGRESO
+========================= */
+
+#en-progreso .tarea {
+  background:
+    linear-gradient(180deg, rgba(102, 217, 157, 0.035), rgba(102, 217, 157, 0.015)),
+    var(--bg-task-progress);
+
+  border-color: var(--border-progress);
+}
+
+#en-progreso .tarea:hover {
+  border-color: var(--border-progress-hover);
+
+  box-shadow:
+    0 16px 34px var(--shadow-dark-strong),
+    0 0 28px var(--shadow-progress-card);
+}
+
+#en-progreso .tarea h1 {
+  color: var(--text-progress);
+}
+
+/* =========================
+   FINALIZADAS
+========================= */
+
+#finalizados .tarea {
+  opacity: 0.62;
+
+  background:
+    linear-gradient(180deg, rgba(223, 115, 115, 0.025), rgba(223, 115, 115, 0.01)),
+    var(--bg-task-done);
+
+  border-color: var(--border-done);
+}
+
+#finalizados .tarea:hover {
+  opacity: 0.78;
+}
+
+#finalizados .tarea h1 {
+  color: var(--text-done);
+
+  font-weight: 400;
+
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}

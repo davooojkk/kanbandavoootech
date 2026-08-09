@@ -1,0 +1,49 @@
+.input-edit-nombres {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  padding: 8px 10px;
+
+  color: var(--text-task);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--white-0035),
+      var(--white-0015)
+    ),
+    var(--bg-edit-input);
+
+  border: 1px solid var(--border-edit);
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  letter-spacing: -0.01em;
+
+  box-shadow:
+    0 0 0 3px var(--shadow-primary-soft),
+    inset 0 1px 0 var(--white-003);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.input-edit-nombres:focus {
+  border-color: var(--border-edit-focus);
+
+  background-color: var(--bg-edit-input-focus);
+
+  box-shadow:
+    0 0 0 4px var(--shadow-primary-ring),
+    0 8px 22px var(--shadow-dark-soft);
+}
+
+.input-edit-nombres::selection {
+  background-color: var(--selection-primary);
+}

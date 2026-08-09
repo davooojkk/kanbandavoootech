@@ -1,0 +1,62 @@
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: 1fr;
+
+    width: min(620px, calc(100% - 32px));
+
+    padding: 36px 0 48px;
+  }
+
+  #task-form {
+    grid-column: auto;
+  }
+
+  #pendientes,
+  #en-progreso,
+  #finalizados {
+    min-height: 240px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  body {
+    width: calc(100% - 22px);
+
+    gap: 16px;
+
+    padding: 22px 0 34px;
+  }
+
+  #task-form {
+    border-radius: 14px;
+  }
+
+  #task-input {
+    padding: 13px 14px;
+  }
+
+  #pendientes,
+  #en-progreso,
+  #finalizados {
+    padding: 64px 12px 12px;
+
+    border-radius: 15px;
+  }
+
+  .tarea {
+    padding: 14px 12px 12px 36px;
+
+    border-radius: 11px;
+  }
+
+  .tarea::before {
+    top: 19px;
+    left: 14px;
+  }
+
+  .tarea h1,
+  .input-edit-nombres {
+    font-size: 14px;
+  }
+}
