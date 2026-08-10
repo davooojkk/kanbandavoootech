@@ -1,10 +1,10 @@
-@media (max-width: 900px) {
+@media (max-width: 56.25rem) {
   body {
     grid-template-columns: 1fr;
 
-    width: min(620px, calc(100% - 32px));
+    width: min(38.75rem, calc(100% - 2rem));
 
-    padding: 36px 0 48px;
+    padding: 2.25rem 0 3rem;
   }
 
   #task-form {
@@ -14,49 +14,48 @@
   #pendientes,
   #en-progreso,
   #finalizados {
-    min-height: 240px;
+    min-height: auto;
   }
 }
 
-
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   body {
-    width: calc(100% - 22px);
+    width: calc(100% - 1.375rem);
 
-    gap: 16px;
+    gap: 1rem;
 
-    padding: 22px 0 34px;
+    padding: 1.375rem 0 2.125rem;
   }
 
   #task-form {
-    border-radius: 14px;
+    border-radius: 0.875rem;
   }
 
   #task-input {
-    padding: 13px 14px;
+    padding: 0.8125rem 0.875rem;
   }
 
   #pendientes,
   #en-progreso,
   #finalizados {
-    padding: 64px 12px 12px;
+    padding: 3rem 0.625rem 0.625rem;
 
-    border-radius: 15px;
+    border-radius: 0.9375rem;
   }
 
   .tarea {
-    padding: 14px 12px 12px 36px;
+    padding: 0.6875rem 0.625rem 0.6875rem 2rem;
 
-    border-radius: 11px;
+    border-radius: 0.625rem;
   }
 
   .tarea::before {
-    top: 19px;
-    left: 14px;
+    top: 1.1875rem;
+    left: 0.875rem;
   }
 
   .tarea h1,
   .input-edit-nombres {
-    font-size: 14px;
+    font-size: 0.75rem;
   }
 }

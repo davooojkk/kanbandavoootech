@@ -83,7 +83,7 @@ function crearTarjeta(tarea) {
   activarDrag(tarea, tarjetaDiv);
   const tarjetaTitulo = document.createElement("h1");
   tarjetaTitulo.innerText = tarea.nombre;
-  activarEdicion(tarea, tarjetaTitulo);
+  activarEdicion(tarea, tarjetaTitulo, tarjetaDiv);
   const botonEliminar = document.createElement("button");
   botonEliminar.innerText = "🗑️";
 
@@ -111,8 +111,9 @@ function editarNombre(id, nuevoNombre) {
 
 // ---- abrir input de edicion de nombre ---- //
 
-function activarEdicion(tarea, tarjetaTitulo) {
+function activarEdicion(tarea, tarjetaTitulo, tarjetaDiv) {
   tarjetaTitulo.addEventListener("click", () => {
+    tarjetaDiv.draggable = false;
     const inputEditar = document.createElement("input");
 
     inputEditar.classList.add("input-edit-nombres");
@@ -126,12 +127,14 @@ function activarEdicion(tarea, tarjetaTitulo) {
 
       if (nuevoNombre !== "") {
         editarNombre(tarea.id, nuevoNombre);
-      }
-    }
+      } else {
+      renderTareas();
+    };
+    } 
 
     inputEditar.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
-        guardarEdicion();
+        inputEditar.blur();
       }
     });
 
