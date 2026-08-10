@@ -1,6 +1,7 @@
 # kanbandavoootech
 
 -- versión 1.0 --
+
 No considero que sea necesario ponerme a explicar para que sirve un Kan Ban
 pero en el caso de que no lo conozcas, a continuación lo explico brevemente.
 
