@@ -1,17 +1,27 @@
-/* ---- basicos ---- */
+/*
+ * Punto de entrada de los estilos.
+ * El orden de capas expresa la arquitectura y evita depender de selectores
+ * cada vez más específicos para resolver la cascada.
+ */
+@layer settings, reset, base, layout, components, utilities;
 
-@import url('./basicos/base.css');
-@import url('./basicos/layout.css');
-@import url('./basicos/colors.css');
+@import url("./settings/tokens.css") layer(settings);
 
-/* ---- main ---- */
+@import url("./base/reset.css") layer(reset);
+@import url("./base/global.css") layer(base);
 
-@import url('./main/board.css');
-@import url('./main/form.css');
-@import url('./main/edit.css');
-@import url('./main/task.css');
-@import url('./main/site.css');
+@import url("./layout/shell.css") layer(layout);
 
-/* Responsive se carga al final para que sus ajustes prevalezcan. */
+@import url("./components/controls.css") layer(components);
+@import url("./components/site-header.css") layer(components);
+@import url("./components/task-form.css") layer(components);
+@import url("./components/board.css") layer(components);
+@import url("./components/task-card.css") layer(components);
+@import url("./components/task-selector.css") layer(components);
+@import url("./components/task-state-selector.css") layer(components);
+@import url("./components/task-priority-selector.css") layer(components);
+@import url("./components/feedback.css") layer(components);
+@import url("./components/dialog.css") layer(components);
+@import url("./components/site-footer.css") layer(components);
 
-@import url('./basicos/responsive.css');
+@import url("./utilities/accessibility.css") layer(utilities);

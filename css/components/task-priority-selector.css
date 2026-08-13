@@ -1,0 +1,59 @@
+/* La prioridad funciona como una insignia de ancho fijo. */
+.selector-tarea--prioridad .selector-tarea__activador {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-xs);
+  width: 5.75rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid currentColor;
+  border-radius: var(--radio-pildora);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+.selector-tarea--prioridad .selector-tarea__activador:is(:hover, :focus-visible),
+.selector-tarea--prioridad[open] .selector-tarea__activador {
+  background: var(--brillo);
+}
+
+.tarea-prioridad-flecha {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-65%) rotate(45deg);
+}
+
+.selector-tarea--prioridad[open] .tarea-prioridad-flecha {
+  transform: translateY(-35%) rotate(225deg);
+}
+
+.tarea-prioridad-opciones {
+  width: 8rem;
+}
+
+.tarea-prioridad-opcion::before {
+  background: var(--texto-apagado);
+}
+
+.tarea-prioridad-opcion--actual {
+  background: var(--brillo);
+}
+
+.tarea-prioridad--critico { color: var(--rojo); }
+.tarea-prioridad--alto { color: var(--amarillo); }
+.tarea-prioridad--normal { color: var(--texto-suave); }
+.tarea-prioridad-opcion--critico::before { background: var(--rojo); }
+.tarea-prioridad-opcion--alto::before { background: var(--amarillo); }
+.tarea-prioridad-opcion--normal::before { background: var(--texto-suave); }
+
+@media (max-width: 68.75rem) {
+  .selector-tarea--prioridad .selector-tarea__activador {
+    justify-content: flex-start;
+    padding-right: 1.75rem;
+    padding-left: 0.75rem;
+  }
+}

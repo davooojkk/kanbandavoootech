@@ -1,0 +1,47 @@
+.account-dialog {
+  width: min(25rem, calc(100% - 2rem));
+  margin: auto;
+  padding: var(--espacio-l);
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-panel);
+  box-shadow: 0 1.25rem 3rem var(--sombra);
+}
+
+.account-dialog[open] {
+  animation: aparecer-dialogo var(--duracion-lenta) var(--curva-entrada);
+}
+
+.account-dialog::backdrop {
+  background: rgba(11, 11, 14, 0.78);
+  backdrop-filter: blur(0.25rem);
+}
+
+.dialog-eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--rosa);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.account-dialog h2 {
+  margin-bottom: 0.625rem;
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.account-dialog p:not(.dialog-eyebrow) {
+  margin-bottom: 1.25rem;
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+@keyframes aparecer-dialogo {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+}

@@ -1,0 +1,13 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--texto);
+  background: var(--fondo);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
