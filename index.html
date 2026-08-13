@@ -1,32 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Kan Ban Davotech</title>
   </head>
   <body>
+    <header class="site-header">
+      <a class="site-brand" href="./" aria-label="Davotech, volver al tablero">
+        davotech
+      </a>
 
-    <form id="task-form">
-      <input id="task-input" type="text" placeholder="Escribe una tarea...">
-    </form>
+      <button
+        class="account-action"
+        id="account-action"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="account-dialog"
+      >
+        <span>Registrarse / Log-in</span>
+        <span class="account-avatar" aria-hidden="true"></span>
+      </button>
+    </header>
 
-    <section id="pendientes">
+    <main class="tablero">
+      <h1 class="sr-only">Tablero Kanban de Davotech</h1>
 
-    </section>
+      <form id="task-form" aria-labelledby="task-form-title">
+        <h2 class="sr-only" id="task-form-title">Crear una tarea</h2>
+        <label class="sr-only" for="task-input">Nombre de la tarea</label>
+        <input
+          id="task-input"
+          type="text"
+          placeholder="Escribe una tarea..."
+          autocomplete="off"
+          required
+        >
 
-    <section id="en-progreso">
+        <div class="task-form-options">
+          <label for="task-priority">Nivel de prioridad</label>
+          <span class="selector-prioridad">
+            <select id="task-priority">
+              <option value="critico">Crítico — atención inmediata</option>
+              <option value="alto">Alto — importante</option>
+              <option value="normal" selected>Normal — sin urgencia</option>
+            </select>
+          </span>
+          <button type="submit">Añadir tarea</button>
+        </div>
+      </form>
 
-    </section>
+      <p
+        class="storage-status"
+        id="task-storage-status"
+        role="alert"
+        hidden
+      ></p>
 
-    <section id="finalizados">
+      <p class="sr-only" id="task-instructions">
+        Puedes cambiar el estado de cada tarea con su selector o arrastrarla
+        entre las columnas.
+      </p>
+      <p class="sr-only" id="edit-name-instructions">
+        Activa el nombre de una tarea para editarlo.
+      </p>
+      <p
+        class="sr-only"
+        id="task-announcer"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></p>
 
-    </section>
+      <section id="pendientes" aria-labelledby="pendientes-title">
+        <h2 class="column-title" id="pendientes-title">Pendientes</h2>
+        <div class="column-tasks" role="list"></div>
+      </section>
+      <section id="en-progreso" aria-labelledby="progreso-title">
+        <h2 class="column-title" id="progreso-title">En progreso</h2>
+        <div class="column-tasks" role="list"></div>
+      </section>
+      <section id="finalizados" aria-labelledby="finalizados-title">
+        <h2 class="column-title" id="finalizados-title">Finalizadas</h2>
+        <div class="column-tasks" role="list"></div>
+      </section>
+    </main>
 
+    <footer class="site-footer">
+      <div class="footer-column">
+        <h2>Contactos</h2>
+        <a href="https://www.instagram.com/davotech.uy/" target="_blank" rel="noopener noreferrer">
+          Instagram<span class="sr-only">, abre una pestaña nueva</span>
+        </a>
+        <a
+          href="https://wa.me/5548991702401?text=Hola%2C%20Davotech.%20Quisiera%20comunicarme%20contigo."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp<span class="sr-only">, abre una conversación con un mensaje de saludo</span>
+        </a>
+      </div>
+
+      <nav class="footer-column" aria-labelledby="more-projects-title">
+        <h2 id="more-projects-title">Más proyectos</h2>
+        <a href="https://davooojkk.github.io/bikcraft_aula/" target="_blank" rel="noopener noreferrer">
+          Bikcraft<span class="sr-only">, abre una pestaña nueva</span>
+        </a>
+        <a href="https://davooojkk.github.io/animalesfantasticos/" target="_blank" rel="noopener noreferrer">
+          Animales fantásticos<span class="sr-only">, abre una pestaña nueva</span>
+        </a>
+        <a href="https://donquijotechuy.com/" target="_blank" rel="noopener noreferrer">
+          Don Quijote Restaurant<span class="sr-only">, abre una pestaña nueva</span>
+        </a>
+      </nav>
+    </footer>
+
+    <dialog
+      class="account-dialog"
+      id="account-dialog"
+      aria-labelledby="account-dialog-title"
+      aria-describedby="account-dialog-description"
+    >
+      <p class="dialog-eyebrow">Davotech</p>
+      <h2 id="account-dialog-title">Acceso próximamente</h2>
+      <p id="account-dialog-description">
+        Esta opción aún no está habilitada…
+      </p>
+      <button id="account-dialog-close" type="button">Entendido</button>
+    </dialog>
 
     <script type="module" src="./js/app.js"></script>
   </body>

@@ -1,229 +1,258 @@
 .tarea {
   position: relative;
-
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-
-  gap: 0.625rem;
-
+  gap: 0.5rem 0.625rem;
   margin-bottom: 0.75rem;
   padding: 1rem 0.875rem 0.875rem 2.5rem;
-
   cursor: grab;
-
   background:
-    linear-gradient(
-      180deg,
-      var(--white-0035),
-      rgba(255, 255, 255, 0.012)
-    ),
-    var(--bg-task);
-
-  border: 1px solid var(--border-task);
+    linear-gradient(180deg, var(--brillo), rgba(255, 255, 255, 0.012)),
+    var(--tarjeta);
+  border: 1px solid var(--borde);
   border-radius: 0.8125rem;
-
   box-shadow:
-    0 0.625rem 1.5625rem var(--shadow-dark-soft),
-    inset 0 1px 0 var(--white-002);
+    0 0.625rem 1.5625rem var(--sombra),
+    inset 0 1px 0 var(--brillo);
 
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+  animation: aparecer-tarea 0.22s ease-out;
+
+  transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@keyframes aparecer-tarea {
+  from {
+    opacity: 0;
+    transform: translateY(0.375rem);
+  }
 }
 
 .tarea:hover {
   transform: translateY(-0.1875rem);
-
-  border-color: var(--border-task-hover);
-
+  border-color: var(--borde-fuerte);
   box-shadow:
-    0 1rem 2.125rem var(--shadow-dark-strong),
-    inset 0 1px 0 var(--white-003);
+    0 1rem 2.125rem var(--sombra),
+    inset 0 1px 0 var(--brillo);
 }
 
-.tarea:active {
-  cursor: grabbing;
-}
-
-
-/* =========================
-   DRAG
-========================= */
-
-.tarea.dragging {
-  opacity: 0.35;
-
-  transform: scale(0.97) rotate(1deg);
-
-  border-color: var(--primary);
-
-  box-shadow:
-    0 0 0 0.1875rem var(--shadow-primary-soft),
-    0 1.125rem 2.1875rem var(--shadow-dark-strong);
-}
-
-
-/* =========================
-   INDICADOR
-========================= */
+.tarea:active { cursor: grabbing; }
 
 .tarea::before {
   content: "";
-
   position: absolute;
-
   top: 1.3125rem;
   left: 1.0625rem;
-
   width: 0.5rem;
   height: 0.5rem;
-
   border-radius: 50%;
 }
 
 #pendientes .tarea::before {
-  background: var(--pending);
-
-  box-shadow:
-    0 0 0 0.25rem var(--shadow-pending-dot),
-    0 0 1rem var(--shadow-pending-glow);
+  background: var(--amarillo);
+  box-shadow: 0 0 0 0.25rem rgba(239, 198, 93, 0.08), 0 0 1rem rgba(239, 198, 93, 0.22);
 }
 
 #en-progreso .tarea::before {
-  background: var(--progress);
-
-  box-shadow:
-    0 0 0 0.25rem var(--shadow-progress-dot),
-    0 0 1rem var(--shadow-progress-glow);
+  background: var(--verde);
+  box-shadow: 0 0 0 0.25rem rgba(102, 217, 157, 0.08), 0 0 1rem rgba(102, 217, 157, 0.22);
 }
 
 #finalizados .tarea::before {
-  background: var(--done-dot);
-
-  box-shadow:
-    0 0 0 0.25rem var(--shadow-done-dot),
-    0 0 1rem var(--shadow-done-glow);
+  background: var(--rojo);
+  box-shadow: 0 0 0 0.25rem rgba(223, 115, 115, 0.08), 0 0 1rem rgba(223, 115, 115, 0.18);
 }
 
-
-/* =========================
-   TITULO
-========================= */
-
-.tarea h1 {
+.tarea-encabezado {
   grid-column: 1 / -1;
-
-  color: var(--text-task);
-
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 1.45;
-
-  letter-spacing: -0.015em;
-
-  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
-
-/* =========================
-   BOTÓN ELIMINAR
-========================= */
-
-.tarea button {
-  justify-self: end;
-  width: fit-content;
-
-  min-height: auto;
-  padding: 0.5rem;
-
-  color: var(--text-secondary);
-  background: var(--white-0015);
-
-  border: 1px solid var(--border-delete);
-  border-radius: 0.375rem;
-
-  font-size: 0.6875rem;
+.tarea-titulo {
+  display: block;
+  width: 100%;
+  min-height: 1.5rem;
+  padding: 0;
+  color: var(--texto);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-size: 0.9375rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
 
-  letter-spacing: 0.01em;
+  cursor: text;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.tarea-titulo:hover {
+  opacity: 0.82;
+}
+
+.selector-estado {
+  grid-column: 1 / -1;
+  position: relative;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+}
+
+.selector-estado::after {
+  content: "";
+  position: absolute;
+  right: 0.25rem;
+  width: 0.3125rem;
+  height: 0.3125rem;
+  pointer-events: none;
+  border-right: 1px solid var(--texto-suave);
+  border-bottom: 1px solid var(--texto-suave);
+  transform: translateY(-20%) rotate(45deg);
+  transform-origin: center;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.selector-estado:hover::after {
+  border-color: var(--texto);
+}
+
+.selector-estado:has(select:open)::after {
+  transform: translateY(20%) rotate(225deg);
+}
+
+.tarea-estado {
+  appearance: none;
+  max-width: 100%;
+  min-height: 1.75rem;
+  padding: 0.25rem 1.5rem 0.25rem 0;
+  color: var(--texto-suave);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  border-radius: 0.375rem;
 
   transition:
     background-color 0.2s ease,
-    border-color 0.2s ease,
+    box-shadow 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
 }
 
-.tarea button:hover {
-  color: var(--text-primary);
-  background: var(--delete-hover-bg);
-  border-color: var(--border-delete-hover);
-
+.tarea-estado:hover {
+  color: var(--texto);
+  background-color: var(--brillo);
   transform: translateY(-1px);
 }
 
+.tarea-estado:focus {
+  color: var(--texto);
+  background-color: var(--brillo);
+  box-shadow: 0 0 0 0.1875rem rgba(232, 87, 165, 0.08);
+  transform: translateY(-1px);
+}
 
-/* =========================
-   EN PROGRESO
-========================= */
+.tarea-estado:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.tarea-estado option {
+  color: var(--texto);
+  background: var(--superficie);
+}
+
+.tarea-prioridad {
+  justify-self: start;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 5.75rem;
+  min-height: 1.75rem;
+
+  padding: 0.25rem 0.5rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tarea-prioridad:hover,
+.tarea-prioridad:focus-visible {
+  background: var(--brillo);
+  transform: translateY(-1px);
+}
+
+.tarea-prioridad:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.tarea-prioridad--critico { color: var(--rojo); }
+.tarea-prioridad--alto { color: var(--amarillo); }
+.tarea-prioridad--normal { color: var(--texto-suave); }
+
+.tarea-eliminar {
+  justify-self: end;
+  width: fit-content;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0.5rem;
+  color: var(--texto-suave);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--borde);
+  border-radius: 0.375rem;
+  font-size: 0.6875rem;
+  line-height: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tarea-eliminar:hover {
+  color: var(--texto);
+  background: rgba(223, 115, 115, 0.06);
+  border-color: rgba(223, 115, 115, 0.22);
+  transform: translateY(-1px);
+}
+
+.tarea-eliminar:active {
+  transform: translateY(0) scale(0.94);
+}
 
 #en-progreso .tarea {
   background:
-    linear-gradient(
-      180deg,
-      rgba(102, 217, 157, 0.035),
-      rgba(102, 217, 157, 0.015)
-    ),
-    var(--bg-task-progress);
-
-  border-color: var(--border-progress);
+    linear-gradient(180deg, rgba(102, 217, 157, 0.035), rgba(102, 217, 157, 0.015)),
+    var(--tarjeta-progreso);
+  border-color: rgba(102, 217, 157, 0.14);
 }
 
 #en-progreso .tarea:hover {
-  border-color: var(--border-progress-hover);
-
-  box-shadow:
-    0 1rem 2.125rem var(--shadow-dark-strong),
-    0 0 1.75rem var(--shadow-progress-card);
+  border-color: rgba(102, 217, 157, 0.28);
+  box-shadow: 0 1rem 2.125rem var(--sombra), 0 0 1.75rem rgba(102, 217, 157, 0.05);
 }
 
-#en-progreso .tarea h1 {
-  color: var(--text-progress);
-}
-
-
-/* =========================
-   FINALIZADAS
-========================= */
+#en-progreso .tarea-titulo { color: var(--texto); }
 
 #finalizados .tarea {
-  opacity: 0.62;
-
   background:
-    linear-gradient(
-      180deg,
-      rgba(223, 115, 115, 0.025),
-      rgba(223, 115, 115, 0.01)
-    ),
-    var(--bg-task-done);
-
-  border-color: var(--border-done);
+    linear-gradient(180deg, rgba(223, 115, 115, 0.025), rgba(223, 115, 115, 0.01)),
+    var(--tarjeta-final);
+  border-color: rgba(223, 115, 115, 0.11);
 }
 
-#finalizados .tarea:hover {
-  opacity: 0.78;
-}
-
-#finalizados .tarea h1 {
-  color: var(--text-done);
-
-  font-weight: 400;
-
+#finalizados .tarea-titulo {
+  color: var(--texto-suave);
+  font-weight: 500;
   text-decoration: line-through;
   text-decoration-thickness: 1px;
 }
