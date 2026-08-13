@@ -2,82 +2,57 @@
 #en-progreso,
 #finalizados {
   position: relative;
-
   min-height: 32.5rem;
-
   padding: 4.375rem 0.875rem 1rem;
-
   overflow: hidden;
-
   background:
-    linear-gradient(
-      180deg,
-      var(--white-0025),
-      rgba(255, 255, 255, 0.008)
-    ),
-    var(--bg-column);
-
-  border: 1px solid var(--border-column);
+    linear-gradient(180deg, var(--brillo), rgba(255, 255, 255, 0.008)),
+    var(--columna);
+  border: 1px solid var(--borde);
   border-radius: 1.125rem;
-
   box-shadow:
-    0 1.375rem 3.125rem var(--shadow-dark-medium),
-    inset 0 1px 0 var(--white-0025);
+    0 1.375rem 3.125rem var(--sombra),
+    inset 0 1px 0 var(--brillo);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
+#pendientes:hover,
+#en-progreso:hover,
+#finalizados:hover {
+  border-color: var(--borde-fuerte);
 
-/* TITULOS */
+  box-shadow:
+    0 1.5rem 3.5rem var(--sombra),
+    inset 0 1px 0 var(--brillo);
+}
 
-#pendientes::before,
-#en-progreso::before,
-#finalizados::before {
+.column-title {
   position: absolute;
-
   top: 1.375rem;
   left: 1.25rem;
-
+  margin: 0;
   font-size: 0.75rem;
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-#pendientes::before {
-  content: "Pendientes";
-  color: var(--pending-heading);
-}
-
-#en-progreso::before {
-  content: "En progreso";
-  color: var(--progress-heading);
-}
-
-#finalizados::before {
-  content: "Finalizadas";
-  color: var(--done-heading);
-}
-
-
-/* SEPARADOR */
+#pendientes .column-title { color: var(--amarillo); }
+#en-progreso .column-title { color: var(--verde); }
+#finalizados .column-title { color: var(--rojo); }
 
 #pendientes::after,
 #en-progreso::after,
 #finalizados::after {
   content: "";
-
   position: absolute;
-
   top: 3.1875rem;
   right: 0.875rem;
   left: 0.875rem;
-
   height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--white-007),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--borde), transparent);
 }

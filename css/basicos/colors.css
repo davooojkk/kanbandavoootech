@@ -1,135 +1,24 @@
 :root {
-  /* =========================
-     BACKGROUNDS
-  ========================= */
+  --fondo: #0b0b0e;
+  --superficie: #151519;
+  --columna: rgba(20, 20, 24, 0.92);
+  --tarjeta: #1b1b20;
+  --tarjeta-progreso: #17201c;
+  --tarjeta-final: #191617;
+  --campo: #17171c;
 
-  --bg-page: #0b0b0e;
+  --texto: #f5f5f7;
+  --texto-suave: #92929d;
+  --texto-apagado: #6e6e78;
 
-  --bg-form: #151519;
-  --bg-column: rgba(20, 20, 24, 0.92);
+  --rosa: #e857a5;
+  --rosa-oscuro: #c9448c;
+  --amarillo: #efc65d;
+  --verde: #66d99d;
+  --rojo: #df7373;
 
-  --bg-task: #1b1b20;
-  --bg-task-progress: #17201c;
-  --bg-task-done: #191617;
-
-  --bg-edit-input: #17171c;
-  --bg-edit-input-focus: #1b1b21;
-
-
-  /* =========================
-     TEXTOS
-  ========================= */
-
-  --text-primary: #f5f5f7;
-  --text-task: #f4f4f6;
-  --text-progress: #e7f7ee;
-
-  --text-secondary: #92929d;
-  --text-muted: #6e6e78;
-  --text-done: #8f888b;
-
-  --text-white: #ffffff;
-
-
-  /* =========================
-     MARCA
-  ========================= */
-
-  --primary: #e857a5;
-  --primary-dark: #c9448c;
-
-
-  /* =========================
-     ESTADOS
-  ========================= */
-
-  --pending: #efc65d;
-  --pending-heading: #eac55f;
-
-  --progress: #66d99d;
-  --progress-heading: #6bd39b;
-  --progress-button: #49b879;
-  --progress-button-dark: #2f8d5d;
-
-  --done: #df7373;
-  --done-dot: #df7373;
-  --done-heading: #df7777;
-
-
-  /* =========================
-     BLANCOS TRANSPARENTES
-  ========================= */
-
-  --white-0015: rgba(255, 255, 255, 0.015);
-  --white-002: rgba(255, 255, 255, 0.02);
-  --white-0025: rgba(255, 255, 255, 0.025);
-  --white-003: rgba(255, 255, 255, 0.03);
-  --white-0035: rgba(255, 255, 255, 0.035);
-
-  --white-0055: rgba(255, 255, 255, 0.055);
-  --white-0065: rgba(255, 255, 255, 0.065);
-  --white-007: rgba(255, 255, 255, 0.07);
-  --white-0075: rgba(255, 255, 255, 0.075);
-
-  --white-011: rgba(255, 255, 255, 0.11);
-
-
-  /* =========================
-     BORDES
-  ========================= */
-
-  --border-form: var(--white-007);
-  --border-column: var(--white-0055);
-  --border-task: var(--white-0065);
-  --border-task-hover: var(--white-011);
-
-  --border-progress: rgba(102, 217, 157, 0.14);
-  --border-progress-hover: rgba(102, 217, 157, 0.28);
-
-  --border-done: rgba(223, 115, 115, 0.11);
-
-  --border-delete: var(--white-0075);
-  --border-delete-hover: rgba(223, 115, 115, 0.22);
-
-  --border-edit: rgba(232, 87, 165, 0.28);
-  --border-edit-focus: var(--primary);
-
-
-  /* =========================
-     SOMBRAS
-  ========================= */
-
-  --shadow-dark-soft: rgba(0, 0, 0, 0.18);
-  --shadow-dark-medium: rgba(0, 0, 0, 0.22);
-  --shadow-dark-strong: rgba(0, 0, 0, 0.26);
-  --shadow-dark-form: rgba(0, 0, 0, 0.28);
-  --shadow-dark-focus: rgba(0, 0, 0, 0.35);
-
-  --shadow-primary-soft: rgba(232, 87, 165, 0.06);
-  --shadow-primary-focus: rgba(232, 87, 165, 0.09);
-  --shadow-primary-ring: rgba(232, 87, 165, 0.1);
-  --shadow-primary-button: rgba(232, 87, 165, 0.18);
-  --shadow-primary-button-hover: rgba(232, 87, 165, 0.28);
-
-  --shadow-progress-dot: rgba(102, 217, 157, 0.08);
-  --shadow-progress-glow: rgba(102, 217, 157, 0.22);
-  --shadow-progress-card: rgba(102, 217, 157, 0.05);
-
-  --shadow-progress-button: rgba(73, 184, 121, 0.18);
-  --shadow-progress-button-hover: rgba(73, 184, 121, 0.27);
-
-  --shadow-pending-dot: rgba(239, 198, 93, 0.08);
-  --shadow-pending-glow: rgba(239, 198, 93, 0.22);
-
-  --shadow-done-dot: rgba(223, 115, 115, 0.08);
-  --shadow-done-glow: rgba(223, 115, 115, 0.18);
-
-
-  /* =========================
-     OTROS
-  ========================= */
-
-  --delete-hover-bg: rgba(223, 115, 115, 0.06);
-
-  --selection-primary: rgba(232, 87, 165, 0.28);
+  --brillo: rgba(255, 255, 255, 0.03);
+  --borde: rgba(255, 255, 255, 0.07);
+  --borde-fuerte: rgba(255, 255, 255, 0.11);
+  --sombra: rgba(0, 0, 0, 0.28);
 }

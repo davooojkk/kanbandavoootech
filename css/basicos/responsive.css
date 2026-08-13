@@ -1,10 +1,11 @@
 @media (max-width: 56.25rem) {
   body {
-    grid-template-columns: 1fr;
-
     width: min(38.75rem, calc(100% - 2rem));
-
     padding: 2.25rem 0 3rem;
+  }
+
+  .tablero {
+    grid-template-columns: 1fr;
   }
 
   #task-form {
@@ -18,12 +19,26 @@
   }
 }
 
+@media (max-width: 40rem) {
+  .task-form-options {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .task-form-options label {
+    grid-column: 1 / -1;
+  }
+
+  #task-priority {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 30rem) {
   body {
     width: calc(100% - 1.375rem);
-
     gap: 1rem;
-
     padding: 1.375rem 0 2.125rem;
   }
 
@@ -33,19 +48,28 @@
 
   #task-input {
     padding: 0.8125rem 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .task-form-options {
+    grid-template-columns: 1fr;
+
+    padding-left: 0.5rem;
+  }
+
+  .task-form-options button {
+    width: 100%;
   }
 
   #pendientes,
   #en-progreso,
   #finalizados {
     padding: 3rem 0.625rem 0.625rem;
-
     border-radius: 0.9375rem;
   }
 
   .tarea {
     padding: 0.6875rem 0.625rem 0.6875rem 2rem;
-
     border-radius: 0.625rem;
   }
 
@@ -54,8 +78,19 @@
     left: 0.875rem;
   }
 
-  .tarea h1,
+  .tarea-titulo,
   .input-edit-nombres {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

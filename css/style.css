@@ -2,7 +2,6 @@
 
 @import url('./basicos/base.css');
 @import url('./basicos/layout.css');
-@import url('./basicos/responsive.css');
 @import url('./basicos/colors.css');
 
 /* ---- main ---- */
@@ -11,5 +10,8 @@
 @import url('./main/form.css');
 @import url('./main/edit.css');
 @import url('./main/task.css');
+@import url('./main/site.css');
 
+/* Responsive se carga al final para que sus ajustes prevalezcan. */
 
+@import url('./basicos/responsive.css');
