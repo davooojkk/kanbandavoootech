@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:where(input, button, textarea, select) {
+  font: inherit;
+}
+
+:where(button, input, select) {
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}

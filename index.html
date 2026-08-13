@@ -16,10 +16,11 @@
         class="account-action"
         id="account-action"
         type="button"
+        aria-label="Registrarse o iniciar sesión"
         aria-haspopup="dialog"
         aria-controls="account-dialog"
       >
-        <span>Registrarse / Log-in</span>
+        <span class="account-action-label">Registrarse / Log-in</span>
         <span class="account-avatar" aria-hidden="true"></span>
       </button>
     </header>
@@ -28,18 +29,21 @@
       <h1 class="sr-only">Tablero Kanban de Davotech</h1>
 
       <form id="task-form" aria-labelledby="task-form-title">
-        <h2 class="sr-only" id="task-form-title">Crear una tarea</h2>
-        <label class="sr-only" for="task-input">Nombre de la tarea</label>
-        <input
-          id="task-input"
-          type="text"
-          placeholder="Escribe una tarea..."
-          autocomplete="off"
-          required
-        >
+        <div class="task-field task-field--name">
+          <h2 id="task-form-title">Nueva tarea</h2>
+          <label class="sr-only" for="task-input">Nombre de la tarea</label>
+          <input
+            id="task-input"
+            type="text"
+            placeholder="Nombre de la tarea..."
+            autocomplete="off"
+            maxlength="120"
+            required
+          >
+        </div>
 
-        <div class="task-form-options">
-          <label for="task-priority">Nivel de prioridad</label>
+        <div class="task-field task-field--priority">
+          <label for="task-priority">Prioridad</label>
           <span class="selector-prioridad">
             <select id="task-priority">
               <option value="critico">Crítico — atención inmediata</option>
@@ -47,14 +51,17 @@
               <option value="normal" selected>Normal — sin urgencia</option>
             </select>
           </span>
-          <button type="submit">Añadir tarea</button>
         </div>
+
+        <button type="submit">Añadir tarea</button>
       </form>
 
       <p
         class="storage-status"
         id="task-storage-status"
-        role="alert"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
         hidden
       ></p>
 
@@ -74,16 +81,25 @@
       ></p>
 
       <section id="pendientes" aria-labelledby="pendientes-title">
-        <h2 class="column-title" id="pendientes-title">Pendientes</h2>
+        <h2 class="column-title" id="pendientes-title" tabindex="-1">
+          Pendientes
+        </h2>
         <div class="column-tasks" role="list"></div>
+        <p class="column-empty" hidden>No hay tareas pendientes.</p>
       </section>
       <section id="en-progreso" aria-labelledby="progreso-title">
-        <h2 class="column-title" id="progreso-title">En progreso</h2>
+        <h2 class="column-title" id="progreso-title" tabindex="-1">
+          En progreso
+        </h2>
         <div class="column-tasks" role="list"></div>
+        <p class="column-empty" hidden>No hay tareas en progreso.</p>
       </section>
       <section id="finalizados" aria-labelledby="finalizados-title">
-        <h2 class="column-title" id="finalizados-title">Finalizadas</h2>
+        <h2 class="column-title" id="finalizados-title" tabindex="-1">
+          Finalizadas
+        </h2>
         <div class="column-tasks" role="list"></div>
+        <p class="column-empty" hidden>No hay tareas finalizadas.</p>
       </section>
     </main>
 
@@ -115,6 +131,17 @@
         </a>
       </nav>
     </footer>
+
+    <div class="undo-notice" id="undo-notice" hidden>
+      <p id="undo-message" role="status" aria-live="polite" aria-atomic="true"></p>
+      <button
+        id="undo-button"
+        type="button"
+        aria-keyshortcuts="Control+Z Meta+Z"
+      >
+        Deshacer
+      </button>
+    </div>
 
     <dialog
       class="account-dialog"

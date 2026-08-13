@@ -1,0 +1,48 @@
+/* Campos de texto y selección comparten superficie, borde y respuesta. */
+:where(#task-input, #task-priority, .input-edit-nombres) {
+  min-width: 0;
+  color: var(--texto);
+  background: var(--campo);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-control);
+  transition:
+    background-color var(--duracion-rapida) var(--curva-estandar),
+    border-color var(--duracion-rapida) var(--curva-estandar),
+    box-shadow var(--duracion-rapida) var(--curva-estandar),
+    color var(--duracion-rapida) var(--curva-estandar);
+}
+
+:where(#task-input, #task-priority, .input-edit-nombres):hover {
+  background: var(--superficie);
+  border-color: rgba(232, 87, 165, 0.42);
+}
+
+:where(#task-input, #task-priority, .input-edit-nombres):focus {
+  outline: none;
+  background: var(--campo);
+  border-color: var(--rosa);
+  box-shadow: 0 0 0 0.125rem var(--rosa);
+}
+
+/* Solo las acciones primarias usan un relleno rosa sólido. */
+:where(#task-form > button, .account-dialog button) {
+  min-height: 2.75rem;
+  padding: 0.6875rem 1.25rem;
+  color: var(--fondo);
+  background: var(--rosa);
+  border-radius: var(--radio-control);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.25;
+  transition:
+    background-color var(--duracion-rapida) var(--curva-estandar),
+    transform var(--duracion-rapida) var(--curva-estandar);
+}
+
+:where(#task-form > button, .account-dialog button):hover {
+  background: var(--rosa-oscuro);
+}
+
+:where(#task-form > button, .account-dialog button):active {
+  transform: scale(0.98);
+}

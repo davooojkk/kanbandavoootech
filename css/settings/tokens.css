@@ -1,0 +1,45 @@
+:root {
+  /* Paleta: neutros para la estructura y acentos para acciones o estados. */
+  --fondo: #0b0b0e;
+  --superficie: #151519;
+  --columna: rgba(20, 20, 24, 0.92);
+  --tarjeta: #1b1b20;
+  --campo: #17171c;
+
+  --texto: #f5f5f7;
+  --texto-suave: #92929d;
+  --texto-apagado: #888892;
+
+  --rosa: #e857a5;
+  --rosa-oscuro: #c9448c;
+  --amarillo: #efc65d;
+  --verde: #66d99d;
+  --rojo: #df7373;
+
+  --brillo: rgba(255, 255, 255, 0.03);
+  --borde: rgba(255, 255, 255, 0.07);
+  --borde-fuerte: rgba(255, 255, 255, 0.11);
+  --sombra: rgba(0, 0, 0, 0.28);
+
+  /* Ritmo de movimiento compartido por todos los componentes. */
+  --duracion-rapida: 110ms;
+  --duracion-normal: 150ms;
+  --duracion-lenta: 240ms;
+  --curva-estandar: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --curva-entrada: cubic-bezier(0, 0, 0.38, 0.9);
+  --curva-salida: cubic-bezier(0.2, 0, 1, 0.9);
+
+  /* Radios según jerarquía: control, menú, tarjeta, panel y píldora. */
+  --radio-control: 0.5rem;
+  --radio-menu: 0.625rem;
+  --radio-tarjeta: 0.75rem;
+  --radio-panel: 1rem;
+  --radio-pildora: 999px;
+
+  /* Escala espacial basada en 8 px, con un medio paso para casos compactos. */
+  --espacio-xs: 0.5rem;
+  --espacio-s: 0.75rem;
+  --espacio-m: 1rem;
+  --espacio-l: 1.5rem;
+  --espacio-xl: 2rem;
+}

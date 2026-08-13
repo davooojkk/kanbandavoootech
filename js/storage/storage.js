@@ -1,10 +1,16 @@
-import { normalizarPrioridad } from "../tasks/prioridades.js";
-import { crearIdTarea, ESTADOS } from "../tasks/tareas.js";
+import { normalizarTareasGuardadas } from "./task-schema.js";
+
+/*
+ * Este módulo es la frontera entre la aplicación y localStorage. Como cualquier
+ * contenido guardado puede estar incompleto, ser antiguo o haber sido editado
+ * desde fuera, aquí se valida antes de entregarlo al resto del tablero.
+ */
 
 // Conservamos la clave anterior para que ninguna actualización pierda tareas guardadas.
 const CLAVE_TAREAS = "Mis Tareas";
 const CLAVE_RESPALDO = "Respaldo de Mis Tareas";
 
+// Estos son fallos esperables del navegador; los demás deben seguir siendo visibles.
 const ERRORES_STORAGE = ["QuotaExceededError", "SecurityError"];
 
 /** Distingue los problemas del navegador de los errores de programación. */
@@ -27,43 +33,28 @@ function respaldarDatos(contenido) {
   }
 }
 
+/** Construye un aviso persistente según haya sido posible crear el respaldo. */
 function crearAvisoDatosDanados(respaldoCreado) {
-  return respaldoCreado
-    ? "No pudimos leer las tareas guardadas. Iniciamos un tablero vacío y conservamos un respaldo."
-    : "No pudimos leer las tareas guardadas. Iniciamos un tablero vacío para que puedas continuar.";
+  return {
+    mensaje: respaldoCreado
+      ? "No pudimos leer las tareas guardadas. Iniciamos un tablero vacío y conservamos un respaldo."
+      : "No pudimos leer las tareas guardadas. Iniciamos un tablero vacío para que puedas continuar.",
+    tipo: "error",
+    temporal: false,
+  };
 }
 
-/** Comprueba los campos esenciales y repara los valores que tienen alternativa. */
-function prepararTarea(tarea, idsExistentes) {
-  if (
-    tarea === null ||
-    typeof tarea !== "object" ||
-    Array.isArray(tarea) ||
-    typeof tarea.nombre !== "string" ||
-    tarea.nombre.trim() === ""
-  ) {
-    return { tarea: null, fueReparada: true };
+/**
+ * Conserva el contenido original antes de guardar la versión reparada.
+ * Solo reemplazamos los datos cuando el respaldo existe: así una limpieza
+ * automática nunca elimina la única copia disponible de un registro dañado.
+ */
+function guardarReparaciones(tareasGuardadas, tareas) {
+  if (!respaldarDatos(tareasGuardadas)) {
+    return false;
   }
 
-  const nombre = tarea.nombre.trim();
-  const estado = ESTADOS.includes(tarea.estado) ? tarea.estado : "pendiente";
-  const prioridad = normalizarPrioridad(tarea.prioridad);
-  const idEsValido =
-    (typeof tarea.id === "string" && tarea.id.trim() !== "") ||
-    (typeof tarea.id === "number" && Number.isFinite(tarea.id));
-  const idEsUnico = idEsValido && !idsExistentes.has(tarea.id);
-  const id = idEsUnico ? tarea.id : crearIdTarea(idsExistentes);
-
-  idsExistentes.add(id);
-
-  return {
-    tarea: { id, nombre, estado, prioridad },
-    fueReparada:
-      !idEsUnico ||
-      nombre !== tarea.nombre ||
-      estado !== tarea.estado ||
-      prioridad !== tarea.prioridad,
-  };
+  return guardarTareas(tareas).ok;
 }
 
 /**
@@ -84,8 +75,12 @@ export function cargarTareas() {
     console.error("El navegador no permitió leer las tareas.", error);
     return {
       tareas: [],
-      aviso:
-        "El navegador no permite acceder a las tareas guardadas. Puedes usar el tablero, pero los cambios podrían no conservarse.",
+      aviso: {
+        mensaje:
+          "El navegador no permite acceder a las tareas guardadas. Puedes usar el tablero, pero los cambios podrían no conservarse.",
+        tipo: "error",
+        temporal: false,
+      },
     };
   }
 
@@ -117,23 +112,28 @@ export function cargarTareas() {
     };
   }
 
-  const idsExistentes = new Set();
-  const tareas = [];
-  let huboReparaciones = false;
+  const { tareas, huboReparaciones } = normalizarTareasGuardadas(datos);
 
-  datos.forEach((dato) => {
-    const resultado = prepararTarea(dato, idsExistentes);
-    huboReparaciones ||= resultado.fueReparada;
+  const reparacionesGuardadas =
+    !huboReparaciones || guardarReparaciones(tareasGuardadas, tareas);
 
-    if (resultado.tarea !== null) {
-      tareas.push(resultado.tarea);
-    }
-  });
-
+  // La respuesta reúne los datos utilizables y, cuando corresponde, su aviso visual.
   return {
     tareas,
     aviso: huboReparaciones
-      ? "Reparamos algunos datos guardados para que el tablero pudiera cargarse correctamente."
+      ? reparacionesGuardadas
+        ? {
+            mensaje:
+              "Reparamos algunos datos guardados y conservamos una copia de su versión anterior.",
+            tipo: "informativo",
+            temporal: true,
+          }
+        : {
+            mensaje:
+              "Reparamos algunos datos durante esta sesión, pero el navegador no permitió guardar la reparación.",
+            tipo: "error",
+            temporal: false,
+          }
       : null,
   };
 }

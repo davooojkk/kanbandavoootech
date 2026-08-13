@@ -1,0 +1,83 @@
+.storage-status {
+  grid-column: 1 / -1;
+  padding: var(--espacio-s) var(--espacio-m);
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-menu);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  transition:
+    opacity var(--duracion-normal) var(--curva-salida),
+    transform var(--duracion-normal) var(--curva-salida);
+}
+
+.storage-status[data-tipo="error"] {
+  border-color: var(--rojo);
+}
+
+.storage-status--closing {
+  opacity: 0;
+  transform: translateY(-0.375rem);
+}
+
+/* El aviso reversible permanece visible sin bloquear el tablero. */
+.undo-notice {
+  position: fixed;
+  right: var(--espacio-m);
+  bottom: var(--espacio-m);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  max-width: min(26rem, calc(100vw - 2rem));
+  padding: var(--espacio-s) var(--espacio-s) var(--espacio-s) var(--espacio-m);
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-menu);
+  box-shadow: 0 0.75rem 2rem var(--sombra);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  animation: aparecer-control var(--duracion-normal) var(--curva-entrada);
+}
+
+.undo-notice[hidden] {
+  display: none;
+}
+
+.undo-notice p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.undo-notice button {
+  flex: none;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--rosa);
+  border: 1px solid rgba(232, 87, 165, 0.32);
+  border-radius: var(--radio-control);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition:
+    color var(--duracion-rapida) var(--curva-estandar),
+    background-color var(--duracion-rapida) var(--curva-estandar),
+    border-color var(--duracion-rapida) var(--curva-estandar);
+}
+
+.undo-notice button:hover {
+  color: var(--texto);
+  background: rgba(232, 87, 165, 0.08);
+  border-color: rgba(232, 87, 165, 0.5);
+}
+
+@media (max-width: 30rem) {
+  .undo-notice {
+    right: 0.6875rem;
+    bottom: 0.6875rem;
+    left: 0.6875rem;
+    max-width: none;
+  }
+}

@@ -1,0 +1,96 @@
+/* Comportamiento visual común de cualquier selector dentro de una tarjeta. */
+.selector-tarea {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.selector-tarea__activador {
+  min-height: 2rem;
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--duracion-rapida) var(--curva-estandar),
+    border-color var(--duracion-rapida) var(--curva-estandar),
+    color var(--duracion-rapida) var(--curva-estandar),
+    transform var(--duracion-rapida) var(--curva-estandar);
+}
+
+.selector-tarea__activador::-webkit-details-marker {
+  display: none;
+}
+
+.selector-tarea__activador::marker {
+  content: "";
+}
+
+.selector-tarea__activador:active {
+  transform: scale(0.98);
+}
+
+.selector-tarea__flecha {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transition: transform var(--duracion-normal) var(--curva-estandar);
+}
+
+.selector-tarea__opciones {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.375rem);
+  left: 0;
+  display: grid;
+  gap: 0.125rem;
+  padding: var(--espacio-xs);
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-menu);
+  box-shadow: 0 0.75rem 1.75rem var(--sombra);
+  animation: aparecer-opciones var(--duracion-normal) var(--curva-entrada);
+  transform-origin: top left;
+}
+
+.selector-tarea__opcion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.625rem;
+  color: var(--texto-suave);
+  border-radius: var(--radio-control);
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition:
+    background-color var(--duracion-rapida) var(--curva-estandar),
+    color var(--duracion-rapida) var(--curva-estandar);
+}
+
+.selector-tarea__opcion::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+}
+
+.selector-tarea__opcion:is(:hover, :focus-visible) {
+  color: var(--texto);
+  background: var(--brillo);
+}
+
+.selector-tarea__opcion--actual {
+  color: var(--texto);
+}
+
+@keyframes aparecer-opciones {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem) scale(0.98);
+  }
+}
