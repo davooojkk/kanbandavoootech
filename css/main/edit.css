@@ -15,6 +15,19 @@
   box-shadow:
     0 0 0 0.1875rem rgba(232, 87, 165, 0.06),
     inset 0 1px 0 var(--brillo);
+
+  animation: aparecer-control 0.18s ease-out;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.input-edit-nombres:hover {
+  border-color: rgba(232, 87, 165, 0.5);
+  background-color: var(--superficie);
 }
 
 .input-edit-nombres:focus,
@@ -24,6 +37,7 @@
   box-shadow:
     0 0 0 0.25rem rgba(232, 87, 165, 0.1),
     0 0.5rem 1.375rem var(--sombra);
+  transform: translateY(-1px);
 }
 
 .input-edit-prioridad {
@@ -42,6 +56,9 @@
   justify-self: start;
 
   width: 5.75rem;
+
+  animation: aparecer-control 0.18s ease-out;
+  transform-origin: left center;
 }
 
 .selector-prioridad--edicion::after {
@@ -49,4 +66,11 @@
 
   width: 0.375rem;
   height: 0.375rem;
+}
+
+@keyframes aparecer-control {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem) scale(0.98);
+  }
 }

@@ -32,6 +32,8 @@ evitar sobrecargar a "script.js" con todas las responsabilidades de javascript e
 
 En esta versión añadí prioridades —Crítico, Alto y Normal—, su orden automático dentro de cada estado y la posibilidad de editarlas desde cada tarjeta. También mejoré el responsive y pulí la interfaz manteniendo su identidad minimalista.
 
+Los campos de texto y selectores ahora responden de forma suave al pasar el cursor, recibir foco o desplegarse. Estas microinteracciones ayudan a reconocer qué control está activo sin recargar la interfaz, y se desactivan automáticamente cuando el sistema solicita reducir el movimiento.
+
 La interfaz ahora incluye un header con la identidad de Davotech y un acceso de usuario preparado para futuras versiones, además de un footer con contactos y otros proyectos. Como el registro todavía no está disponible, el botón abre un diálogo que lo explica claramente.
 
 También trabajé la accesibilidad: la página declara correctamente el español, utiliza encabezados y secciones con significado, ofrece nombres comprensibles para lectores de pantalla, muestra el foco del teclado y anuncia los cambios importantes. Las tareas pueden editarse y cambiar de estado sin depender del mouse; el drag and drop se mantiene como una alternativa visual.

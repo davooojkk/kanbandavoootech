@@ -33,11 +33,26 @@
   letter-spacing: -0.01em;
 
   transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
     color 0.2s ease,
-    opacity 0.2s ease;
+    transform 0.2s ease;
 }
 
-#task-input::placeholder { color: var(--texto-suave); }
+#task-input::placeholder {
+  color: var(--texto-suave);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+#task-input:hover {
+  background-color: var(--brillo);
+}
+
+#task-input:focus {
+  background-color: var(--brillo);
+  box-shadow: inset 0 -1px 0 rgba(232, 87, 165, 0.38);
+  transform: translateY(-1px);
+}
 
 #task-input:focus::placeholder {
   opacity: 0.55;
@@ -146,6 +161,12 @@
   border-color: var(--rosa);
 
   box-shadow: 0 0 0 0.1875rem rgba(232, 87, 165, 0.1);
+  transform: translateY(-1px);
+}
+
+#task-priority:active,
+.input-edit-prioridad:active {
+  transform: translateY(0) scale(0.99);
 }
 
 #task-priority option,
