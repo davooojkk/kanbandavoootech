@@ -63,4 +63,8 @@
     padding: 3rem 0.625rem 0.625rem;
     border-radius: var(--radio-panel);
   }
+
+  :where(#pendientes, #en-progreso, #finalizados)::after {
+    display: none;
+  }
 }
